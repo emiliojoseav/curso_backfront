@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Services\Helpers;
 
 class DefaultController extends Controller
 {
@@ -17,7 +18,15 @@ class DefaultController extends Controller
     }
     
     public function pruebaAction() {
-      echo 'Hola mundo con Symfony 3';
-      die();
+      // recuperar los registros de la tabla users
+      $em = $this->getDoctrine()->getManager();
+      $userRepo = $em->getRepository('BackendBundle:User');
+      $users = $userRepo->findAll();
+      // devolver respuesta json con los registros devueltos
+      $helpers = $this->get(Helpers::class);
+      return $helpers->json(array(
+          'status' => 'success',
+          'users' => $users
+      ));
     }      
 }

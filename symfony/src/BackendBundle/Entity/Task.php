@@ -13,11 +13,6 @@ class Task
     private $id;
     
     /**
-     * @var int
-     */
-    private $user_id;
-    
-    /**
      * @var string
      */
     private $title;
@@ -35,25 +30,20 @@ class Task
     /**
      * @var \DateTime
      */
-    private $created_at;
+    private $createdAt;
     
     /**
      * @var \DateTime
      */
-    private $updated_at;
+    private $updatedAt;
     
     /**
      * @var \BackendBundle\Entity\User
      */
     private $user;
 
-
     function getId() {
       return $this->id;
-    }
-
-    function getUser_id() {
-      return $this->user_id;
     }
 
     function getTitle() {
@@ -68,12 +58,12 @@ class Task
       return $this->status;
     }
 
-    function getCreated_at() {
-      return $this->created_at;
+    function getCreatedAt() {
+      return $this->createdAt;
     }
 
-    function getUpdated_at() {
-      return $this->updated_at;
+    function getUpdatedAt() {
+      return $this->updatedAt;
     }
 
     function getUser() {
@@ -82,11 +72,6 @@ class Task
 
     function setId($id) {
       $this->id = $id;
-      return $this;
-    }
-
-    function setUser_id($user_id) {
-      $this->user_id = $user_id;
       return $this;
     }
 
@@ -105,20 +90,19 @@ class Task
       return $this;
     }
 
-    function setCreated_at(\DateTime $created_at) {
-      $this->created_at = $created_at;
+    function setCreatedAt(\DateTime $createdAt) {
+      $this->createdAt = $createdAt;
       return $this;
     }
 
-    function setUpdated_at(\DateTime $updated_at) {
-      $this->updated_at = $updated_at;
+    function setUpdatedAt(\DateTime $updatedAt) {
+      $this->updatedAt = $updatedAt;
       return $this;
     }
 
-    function setUser(\BackendBundle\Entity\User $user = null) {
+    function setUser(\BackendBundle\Entity\User $user) {
       $this->user = $user;
       return $this;
     }
-
 }
 

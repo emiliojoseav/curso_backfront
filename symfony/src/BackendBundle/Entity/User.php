@@ -40,7 +40,7 @@ class User
     /**
      * @var \DateTime
      */
-    private $created_at;
+    private $createdAt;
     
     function getId() {
       return $this->id;
@@ -66,8 +66,8 @@ class User
       return $this->password;
     }
 
-    function getCreated_at() {
-      return $this->created_at;
+    function getCreatedAt() {
+      return $this->createdAt;
     }
 
     function setId($id) {
@@ -100,8 +100,8 @@ class User
       return $this;
     }
 
-    function setCreated_at(\DateTime $created_at) {
-      $this->created_at = $created_at;
+    function setCreatedAt(\DateTime $createdAt) {
+      $this->createdAt = $createdAt;
       return $this;
     }
 }
