@@ -16,8 +16,35 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
+
+    public function loginAction(Request $request) {
+      $helpers = $this->get(Helpers::class);
+      // recibir json por POST
+      $json = $request->get('json', null);
+      // array que se devuelve por defecto
+//      $data = array(
+//          'status' => 'error',
+//          'data' => 'send json via post!!' // error por defecto
+//      );
+
+      if ($json) {
+        echo 'json';
+      } else {
+        echo 'not json';
+      }
+      return $helpers->json($json);
+
+      if ($json) {
+        // se hace login
+        $data = array(
+            'status' => 'success',
+            'data' => 'ok'
+        );
+      }
+      return $helpers->json($data);
+    }
     
-    public function pruebaAction() {
+    public function pruebasAction() {
       // recuperar los registros de la tabla users
       $em = $this->getDoctrine()->getManager();
       $userRepo = $em->getRepository('BackendBundle:User');
@@ -28,5 +55,5 @@ class DefaultController extends Controller
           'status' => 'success',
           'users' => $users
       ));
-    }      
+    }    
 }
