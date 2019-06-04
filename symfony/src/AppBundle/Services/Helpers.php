@@ -3,7 +3,7 @@
 namespace AppBundle\Services;
 
 /*
- * Service Helper for request
+ * Diferentes utilidades para los servicios
  */
 class Helpers {
   
@@ -13,6 +13,12 @@ class Helpers {
     $this->manager = $manager;
   }
   
+  /**
+   * Parsea en parámetro a Json
+   * 
+   * @param type $data
+   * @return \Symfony\Component\HttpFoundation\Response
+   */
   public function json($data) {
     // crear el json a partir del parámetro de la función
     $normalizers = array(new \Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer);
