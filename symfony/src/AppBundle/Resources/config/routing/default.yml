@@ -6,7 +6,7 @@ default_index:
 default_pruebas:
     path: /pruebas
     defaults: { _controller: "AppBundle:Default:pruebas"}
-    methods: POST
+    methods: GET
     
 default_login:
     path: /login

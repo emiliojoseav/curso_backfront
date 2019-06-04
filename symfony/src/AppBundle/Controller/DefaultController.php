@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Services\Helpers;
 
 class DefaultController extends Controller
@@ -21,25 +22,27 @@ class DefaultController extends Controller
       $helpers = $this->get(Helpers::class);
       // recibir json por POST
       $json = $request->get('json', null);
-      // array que se devuelve por defecto
-//      $data = array(
-//          'status' => 'error',
-//          'data' => 'send json via post!!' // error por defecto
-//      );
-
-      if ($json) {
-        echo 'json';
-      } else {
-        echo 'not json';
-      }
-      return $helpers->json($json);
-
-      if ($json) {
-        // se hace login
-        $data = array(
+      // error por defecto
+      $data = array(
+          'status' => 'error',
+          'data' => 'Incorrect email or password'
+      );
+      // realizar login
+      if ($json != null) {
+        // convertir json a objeto php
+        $params = json_decode($json);
+        $email = isset($params->email) ? $params->email : null;
+        $password = isset($params->password) ? $params->password : null;
+        // validar email
+        $emailConstraint = new Assert\Email();
+        $emailConstraint->message = "This email is not valid!!";
+        $validate_email = $this->get("validator")->validate($email, $emailConstraint);
+        if (count($validate_email) == 0 && $password != null) {
+          $data = array(
             'status' => 'success',
-            'data' => 'ok'
-        );
+            'data' => 'Correct Email'
+          );
+        }
       }
       return $helpers->json($data);
     }
