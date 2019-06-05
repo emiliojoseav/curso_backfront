@@ -34,6 +34,7 @@ class DefaultController extends Controller
         $params = json_decode($json);
         $email = isset($params->email) ? $params->email : null;
         $password = isset($params->password) ? $params->password : null;
+        $getHash = isset($params->getHash) ? $params->getHash : null;
         // validar email
         $emailConstraint = new Assert\Email();
         $emailConstraint->message = "This email is not valid!!";
@@ -41,14 +42,15 @@ class DefaultController extends Controller
         if (count($validate_email) == 0 && $password != null) {
           // llamar al servicio de autentificación
           $jwt_auth = $this->get(JwtAuth::class);
-          $signup = $jwt_auth->signup($email, $password);
-          
+          // si NO se solicita el hash, se devuelve el token decodificado con la info del usuario legible
+          if ($getHash == null || $getHash == false) {
+            $signup = $jwt_auth->signup($email, $password);
+          // si NO se solicita el hash, se devuelve el token codificado, no legible
+          } else {
+            $signup = $jwt_auth->signup($email, $password, true);
+          }
           // respuesta de éxito
-          $data = array(
-            'status' => 'success',
-            'data' => 'Correct Email',
-            'signup' => $signup
-          );
+          return $this->json($signup);
         }
       }
       // devolver respuetsa parseada a Json
