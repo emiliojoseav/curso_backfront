@@ -57,10 +57,10 @@ class JwtAuth {
         $this->key, // la clave
         'HS256'); // el algoritmo de codificación
       $decode = JWT::decode($jwt, $this->key, array('HS256'));
-      // si NO se solicita el hash, se devuelve el token decodificado
+      // si NO se solicita el hash, se devuelve el token codificado
       if ($getHash == null) {
         $data = $jwt;
-     // si se solicita el hash, se devuelve el token codificado
+     // si se solicita el hash, se devuelve el token decodificado
       } else {
         $data = $decode;
       }
@@ -71,5 +71,27 @@ class JwtAuth {
       );
     }
     return $data;
+  }
+  
+  public function checkToken($jwt, $getIdentity = false) {
+    // decodificar el token recibido
+    $auth = false;
+    try {
+      $decode = JWT::decode($jwt, $this->key, array('HS256'));
+    } catch(\UnexpectedValueException $e) {
+      $auth = false;
+    } catch(\DomainException $e) {
+      $auth = false;
+    }
+    // verificar el objeto decode, y si hay id
+    if (isset($decode) && is_object($decode) && isset($decode->sub)) {
+      $auth = true;
+    }
+    // devolvemos el decode si se requiere identity
+    if ($getIdentity) {
+      return $decode;
+    }
+    // devolvemos auth(true/false) por defecto
+    return $auth;
   }
 }

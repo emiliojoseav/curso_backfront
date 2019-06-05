@@ -42,12 +42,12 @@ class DefaultController extends Controller
         if (count($validate_email) == 0 && $password != null) {
           // llamar al servicio de autentificación
           $jwt_auth = $this->get(JwtAuth::class);
-          // si NO se solicita el hash, se devuelve el token decodificado con la info del usuario legible
+          // si NO se solicita el hash, se devuelve el token codificado
           if ($getHash == null || $getHash == false) {
             $signup = $jwt_auth->signup($email, $password);
-          // si NO se solicita el hash, se devuelve el token codificado, no legible
+          // si NO se solicita el hash, se devuelve el token decodificado
           } else {
-            $signup = $jwt_auth->signup($email, $password, true);
+            $signup = $jwt_auth->signup($email, $password, $getHash);
           }
           // respuesta de éxito
           return $this->json($signup);
@@ -57,16 +57,29 @@ class DefaultController extends Controller
       return $helpers->json($data);
     }
     
-    public function pruebasAction() {
-      // recuperar los registros de la tabla users
-      $em = $this->getDoctrine()->getManager();
-      $userRepo = $em->getRepository('BackendBundle:User');
-      $users = $userRepo->findAll();
-      // devolver respuesta json con los registros devueltos
+    public function pruebasAction(Request $request) {
       $helpers = $this->get(Helpers::class);
-      return $helpers->json(array(
-          'status' => 'success',
-          'users' => $users
-      ));
+      $jwt_auth = $this->get(JwtAuth::class);
+      // recibir el token por POST
+      $token = $request->get("authorization", null);
+      // si se ha recibido el token y es valido, login correcto
+      if ($token && $jwt_auth->checkToken($token)) {
+        // recuperar los registros de la tabla users
+        $em = $this->getDoctrine()->getManager();
+        $userRepo = $em->getRepository('BackendBundle:User');
+        $users = $userRepo->findAll();
+        // devolver respuesta json con los registros devueltos
+        return $helpers->json(array(
+            'status' => 'success',
+            'users' => $users
+        ));
+      // de otra forma, login incorrecto
+      } else {
+        return $helpers->json(array(
+            'status' => 'error',
+            'code' => 400,
+            'users' => "Authorization not valid"
+        ));
+      }
     }    
 }
