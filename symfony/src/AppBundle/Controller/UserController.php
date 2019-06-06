@@ -14,7 +14,7 @@ use BackendBundle\Entity\User;
  */
 class UserController extends Controller {
 
-  public function newUserAction(Request $request) {
+  public function newAction(Request $request) {
     echo "Hola mundo newAction";
     die();
   }

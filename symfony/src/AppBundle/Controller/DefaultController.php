@@ -81,5 +81,10 @@ class DefaultController extends Controller
             'users' => "Authorization not valid"
         ));
       }
-    }    
+    }
+
+    public function newAction(Request $request) {
+    echo "Hola mundo newAction";
+    die();
+  }
 }
