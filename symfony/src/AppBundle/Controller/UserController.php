@@ -51,9 +51,11 @@ class UserController extends Controller {
         $user->setCreatedAt($createdat);
         $user->setEmail($email);
         $user->setName($name);
-        $user->setPassword($password);
         $user->setRole($role);
         $user->setSurname($surname);
+        // cifrar password
+        $pwd = hash('SHA256', $password);
+        $user->setPassword($pwd);
         // buscar usuario en db
         $em = $this->getDoctrine()->getManager();
         $isset_user = $em->
@@ -123,13 +125,17 @@ class UserController extends Controller {
         $validate_email = $this->get("validator")->validate($email, $emailConstraint);
         // comprobaciones
         if ($email && (count($validate_email) == 0) &&
-            $name && $surname && $password) {
+            $name && $surname) {
           // creación de usuario con los datos recibidos
           $user->setEmail($email);
           $user->setName($name);
-          $user->setPassword($password);
           $user->setRole($role);
           $user->setSurname($surname);
+          // cifrar password
+          if ($password) {
+            $pwd = hash('SHA256', $password);
+            $user->setPassword($pwd);
+          }
           // buscar usuario en db
           $isset_user = $em->
                         getRepository('BackendBundle:User')->

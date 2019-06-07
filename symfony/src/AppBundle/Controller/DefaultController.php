@@ -39,15 +39,17 @@ class DefaultController extends Controller
         $emailConstraint = new Assert\Email();
         $emailConstraint->message = "This email is not valid!!";
         $validate_email = $this->get("validator")->validate($email, $emailConstraint);
+        // cifrar password
+        $pwd = hash('SHA256', $password);
         if (count($validate_email) == 0 && $password != null) {
           // llamar al servicio de autentificación
           $jwt_auth = $this->get(JwtAuth::class);
           // si NO se solicita el hash, se devuelve el token codificado
           if ($getHash == null || $getHash == false) {
-            $signup = $jwt_auth->signup($email, $password);
+            $signup = $jwt_auth->signup($email, $pwd);
           // si NO se solicita el hash, se devuelve el token decodificado
           } else {
-            $signup = $jwt_auth->signup($email, $password, $getHash);
+            $signup = $jwt_auth->signup($email, $pwd, $getHash);
           }
           // respuesta de éxito
           return $this->json($signup);

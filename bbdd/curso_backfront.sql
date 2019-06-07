@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2019 a las 21:14:47
+-- Tiempo de generación: 07-06-2019 a las 19:59:30
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -50,17 +50,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(180) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `password` varchar(20) DEFAULT NULL,
+  `password` text,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `role`, `name`, `surname`, `email`, `password`, `created_at`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin@admin.com', 'admin', '2019-05-30 00:00:00');
+(1, 'user', 'admin', 'admin', 'admin@admin.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '2019-05-30 00:00:00');
 
 --
 -- Restricciones para tablas volcadas

@@ -41,7 +41,7 @@ class JwtAuth {
       $signup = true;
     }
     // signup correcto
-    if ($signup === true) {
+    if ($signup) {
       // generar array para el token jwt
       $token = array(
           "sub" => $user->getId(), // datos del usuario
