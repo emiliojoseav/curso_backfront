@@ -22,3 +22,8 @@ user_edir:
     path: /user/edit
     defaults: { _controller: "AppBundle:User:edit"}
     methods: POST
+    
+task_new:
+    path: /task/new
+    defaults: { _controller: "AppBundle:Task:new"}
+    methods: POST
