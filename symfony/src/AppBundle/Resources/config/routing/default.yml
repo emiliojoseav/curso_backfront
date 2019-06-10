@@ -18,7 +18,7 @@ user_new:
     defaults: { _controller: "AppBundle:User:new"}
     methods: POST
 
-user_edir:
+user_edit:
     path: /user/edit
     defaults: { _controller: "AppBundle:User:edit"}
     methods: POST
@@ -26,4 +26,10 @@ user_edir:
 task_new:
     path: /task/new
     defaults: { _controller: "AppBundle:Task:new"}
+    methods: POST
+
+# @param int $id valor por defecto del parámetro
+task_edit:
+    path: /task/edit/{id}
+    defaults: { _controller: "AppBundle:Task:edit", id: null}
     methods: POST

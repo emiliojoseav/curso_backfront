@@ -22,6 +22,11 @@ use AppBundle\Services\JwtAuth;
  */
 class TaskController extends Controller {
   
+  /**
+   * Crea una acción
+   * @param Request $request
+   * @return type
+   */
   public function newAction(Request $request) {
     $helpers = $this->get(Helpers::class);
     $jwt_auth = $this->get(JwtAuth::class);
@@ -79,6 +84,114 @@ class TaskController extends Controller {
             'msg' => 'Task created!',
             'data' => $task
         );
+      } else {
+        $data = array(
+            'status' => 'error',
+            'code' => 400,
+            'msg' => 'Task not created, params error!'
+        );
+      }
+    }
+    return $helpers->json($data);
+  }
+  
+  /**
+   * Edita una tarea
+   * @param Request $request
+   * @return type
+   */
+  public function editAction(Request $request, $id = null) {
+    $helpers = $this->get(Helpers::class);
+    $jwt_auth = $this->get(JwtAuth::class);
+    // verificar el token de login recibido
+    $token = $request->get("authorization", null);
+    $authCheck = $jwt_auth->checkToken($token);
+    // error or defecto
+    $data = array(
+        'status' => 'error',
+        'code' => 400,
+        'msg' => 'Authorization not valid!'
+    );
+    // autenticacion correcta
+    if ($authCheck) {
+      $identity = $jwt_auth->checkToken($token, true);
+      // recibir datos de la tarea
+      $json = $request->get('json', null);
+      if($json) {
+        // crear tarea
+        $params = json_decode($json);
+        $createdAt = new \DateTime('now');
+        $updatedAt = new \DateTime('now');
+        $user_id = ($identity->sub) ? $identity->sub : null;
+        $title = (isset($params->title)) ? $params->title : null;
+        $description = (isset($params->description)) ? $params->description : null;
+        $status = (isset($params->status)) ? $params->status : null;
+        if ($user_id && $title) {
+          $em = $this->getDoctrine()->getManager();
+          $user = $em->
+                  getRepository('BackendBundle:User')->
+                  findOneBy(array(
+                      'id' => $user_id
+                  ));
+          // si no hay "id", creamos la tarea
+          if (!$id) {
+            $task = new Task();
+            $task->setCreatedAt($createdAt);
+            $task->setDescription($description);
+            $task->setStatus($status);
+            $task->setTitle($title);
+            $task->setUpdatedAt($updatedAt);
+            $task->setUser($user);
+            // guardar cambios en db
+            $em->persist($task);
+            $em->flush();
+            $data = array(
+                'status' => 'success',
+                'code' => 200,
+                'msg' => 'Task created!',
+                'data' => $task
+            );
+          // si hay "id", editamos la tarea
+          } else  {
+            // recuperar tarea de la db con el id facilitado
+            $task = $em->
+                  getRepository('BackendBundle:Task')->
+                  findOneBy(array(
+                      'id' => $id
+                  ));
+            // verificar que la tarea a editar pertenece al usuario logueado
+            if ($identity->sub && 
+                $identity->sub == $task->getUser()->getId()) {
+              // editar tarea
+              $task->setDescription($description);
+              $task->setStatus($status);
+              $task->setTitle($title);
+              $task->setUpdatedAt($updatedAt);
+              // guardar cambios en db
+              $em->persist($task);
+              $em->flush();
+              $data = array(
+                  'status' => 'success',
+                  'code' => 200,
+                  'msg' => 'Task edited!',
+                  'data' => $task
+              );
+            } else {
+              $data = array(
+                'status' => 'error',
+                'code' => 400,
+                'msg' => 'Task update error, user validation failed!'
+              );
+            }
+            
+          }
+        } else {
+          $data = array(
+            'status' => 'error',
+            'code' => 400,
+            'msg' => 'Task not created, params error!'
+          );
+        }
       } else {
         $data = array(
             'status' => 'error',
