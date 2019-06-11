@@ -28,7 +28,7 @@ task_new:
     defaults: { _controller: "AppBundle:Task:new"}
     methods: POST
 
-# @param int $id valor por defecto del parámetro
+# id, identificador que se pasa por url, por defecto null
 task_edit:
     path: /task/edit/{id}
     defaults: { _controller: "AppBundle:Task:edit", id: null}

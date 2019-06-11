@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-06-2019 a las 19:59:30
+-- Tiempo de generación: 11-06-2019 a las 21:42:56
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -36,7 +36,15 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tasks_users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `user_id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Tarea1 editada', 'olakase', 'editada', '2019-06-08 20:05:16', '2019-06-11 21:38:30'),
+(2, 1, 'Tarea2', 'olakase', 'todo', '2019-06-11 21:40:55', '2019-06-11 21:40:55');
 
 -- --------------------------------------------------------
 
@@ -53,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` text,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `users`
