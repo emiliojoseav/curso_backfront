@@ -41,6 +41,7 @@ class TaskController extends Controller {
     );
     // autenticacion correcta
     if ($authCheck) {
+      // info del usuario logueado
       $identity = $jwt_auth->checkToken($token, true);
       // recibir datos de la tarea
       $json = $request->get('json', null);
@@ -114,6 +115,7 @@ class TaskController extends Controller {
     );
     // autenticacion correcta
     if ($authCheck) {
+      // info del usuario logueado
       $identity = $jwt_auth->checkToken($token, true);
       // recibir datos de la tarea
       $json = $request->get('json', null);
@@ -199,6 +201,53 @@ class TaskController extends Controller {
             'msg' => 'Task not created, params error!'
         );
       }
+    }
+    return $helpers->json($data);
+  }
+
+  /**
+   * Lista todas las tareas
+   * @param Request $request
+   */
+  public function tasksAction(Request $request) {
+    $helpers = $this->get(Helpers::class);
+    $jwt_auth = $this->get(JwtAuth::class);
+    // verificar el token de login recibido
+    $token = $request->get("authorization", null);
+    $authCheck = $jwt_auth->checkToken($token);
+    // error por defecto
+    $data = array(
+        'status' => 'error',
+        'code' => 400,
+        'msg' => 'Authorization not valid!'
+    );
+    // autenticacion correcta
+    if ($authCheck) {
+      // info del usuario logueado
+      $identity = $jwt_auth->checkToken($token, true);
+      $em = $this->getDoctrine()->getManager();
+      // recuperar de db las tareas del usuario
+      $dql = 'SELECT t FROM BackendBundle:Task t ORDER BY t.id DESC';
+      $query = $em->createQuery($dql);
+      // cargar nuestro paginador
+      $page = $request->query->getInt('page', 1); // recoger la página con el listado que llega por http
+      $paginator = $this->get('knp_paginator'); // cargar el paginador creado anteriormente en app/AppKernel.php
+      $items_per_page = 10; // tareas por página mostrada  
+      $pagination = $paginator->paginate($query, $page, $items_per_page); //carga en el paginador las tareas listadas
+      $total_items_count = $pagination->getTotalItemCount(); // cuenta el total de tareas listadas
+      // devolver el resultado
+      $data = array(
+          'status' => 'success',
+          'code' => 200,
+          'msg' => 'OK',
+          'total_items_count' => $total_items_count,
+          'page_actual' => $page,
+          'items_per_page' => $items_per_page,
+          'total_pages' => ceil($total_items_count/$items_per_page),
+          'data' => $pagination
+      );
+    } else {
+
     }
     return $helpers->json($data);
   }
