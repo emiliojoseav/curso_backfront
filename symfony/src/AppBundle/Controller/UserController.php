@@ -167,9 +167,6 @@ class UserController extends Controller {
           'msg' => 'Authorization not valid!'
       );
     }
-
-    
     return $helpers->json($data);
   }
-
 }
