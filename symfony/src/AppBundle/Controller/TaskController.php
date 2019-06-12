@@ -220,7 +220,9 @@ class TaskController extends Controller {
     $identity = $jwt_auth->checkToken($token, true);
     $em = $this->getDoctrine()->getManager();
     // recuperar de db las tareas del usuario
-    $dql = 'SELECT t FROM BackendBundle:Task t ORDER BY t.id DESC';
+    $dql = "SELECT t FROM BackendBundle:Task t ".
+           "WHERE t.user = {$identity->sub} ".
+           "ORDER BY t.id DESC";
     $query = $em->createQuery($dql);
     // cargar nuestro paginador
     $page = $request->query->getInt('page', 1); // recoger la página con el listado que llega por http
@@ -347,5 +349,50 @@ class TaskController extends Controller {
           'code' => 200,
           'data' => $tasks
       ));
+  }
+  
+  
+  public function removeAction(Request $request, $id = null) {
+    $helpers = $this->get(Helpers::class);
+    $jwt_auth = $this->get(JwtAuth::class);
+    // verificar el token de login recibido
+    $token = $request->get("authorization", null);
+    $authCheck = $jwt_auth->checkToken($token);
+    // autenticacion incorrecta
+    if (!$authCheck) {
+      return $helpers->json(array(
+                  'status' => 'error',
+                  'code' => 400,
+                  'msg' => 'Authorization not valid!'
+      ));
+    }
+    // info del usuario logueado
+    $identity = $jwt_auth->checkToken($token, true);
+    // buscar tarea en db
+    $em = $this->getDoctrine()->getManager();
+    $task = $em->
+            getRepository('BackendBundle:Task')->
+            findOneBy(array(
+              'id' => $id
+            ));
+    // tarea no encontrada
+    if (!$task ||
+        !is_object($task) ||
+        !($identity->sub == $task->getUser()->getId())) {
+      return $helpers->json(array(
+                  'status' => 'error',
+                  'code' => 404,
+                  'msg' => 'User task not found'
+      ));
+    }
+    // se elimina la tarea de la db
+    $em->remove($task);
+    $em->flush();
+    // devolver tarea
+    return $helpers->json(array(
+        'status' => 'success',
+        'code' => 200,
+        'data' => $task
+    ));
   }
 }

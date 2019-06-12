@@ -35,16 +35,21 @@ task_edit:
     methods: POST
     
 tasks_list:
-    path: /list
+    path: /task/list
     defaults: { _controller: "AppBundle:Task:tasks"}
     methods: POST
     
 tasks_detail:
-    path: /detail/{id}
+    path: /task/detail/{id}
     defaults: { _controller: "AppBundle:Task:task", id:null}
     methods: POST
     
 task_search:
     path: /task/search/{search}
     defaults: { _controller: "AppBundle:Task:search", search:null}
+    methods: POST
+    
+task_remove:
+    path: /task/remove/{id}
+    defaults: { _controller: "AppBundle:Task:remove", id:null}
     methods: POST
