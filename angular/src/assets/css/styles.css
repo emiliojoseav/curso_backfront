@@ -1,3 +1,8 @@
-body {
-	background: green;
+#logo {
+	height: 35px;
+	margin: 10px;
+}
+
+#header {
+	margin-top: 15px;
 }
