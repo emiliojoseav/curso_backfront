@@ -35,6 +35,7 @@ class DefaultController extends Controller
         $email = isset($params->email) ? $params->email : null;
         $password = isset($params->password) ? $params->password : null;
         $getHash = isset($params->getHash) ? $params->getHash : null;
+        $getHash = ($getHash === 'false') ? false : true;
         // validar email
         $emailConstraint = new Assert\Email();
         $emailConstraint->message = "This email is not valid!!";

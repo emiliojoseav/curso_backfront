@@ -22,12 +22,13 @@ export class LoginComponent implements OnInit {
       this.user = {
         "email" : "",
         "password" : "",
-        "getHash" : "false"
+        "getHash" : "true"
       };
   }
   ngOnInit() {
     console.log('Componente login.component cargado!!');
     console.log(JSON.parse(localStorage.getItem('identity')));
+    console.log(JSON.parse(localStorage.getItem('token')));
   }
 
   onSubmit() {
@@ -37,10 +38,28 @@ export class LoginComponent implements OnInit {
         this.identity = response;
         if (this.identity.length <= 1) {
           console.log('Error en el servidor');
+          console.log(this.identity);
         } else {
           if (!this.identity.status) {
             localStorage.setItem('identity', JSON.stringify(this.identity));
-            console.log('Error en el servidor');
+            // GET TOKEN
+            this.user.getHash = "false";
+            this._userService.signup(this.user).subscribe(
+              response => {
+                this.token = response;
+                if (this.identity.length <= 1) {
+                  console.log('Error en el servidor');
+                  console.log(this.identity);
+                } else {
+                  if (!this.identity.status) {
+                    localStorage.setItem('token', JSON.stringify(this.token));
+                  }
+                }
+              },
+              error => {
+                console.log(<any>error);
+              }
+            );
           }
         }
       },
