@@ -123,3 +123,9 @@ b0bbab,::1,POST,http://localhost/curso-backfront/symfony/web/app_dev.php/task/ne
 aa9a8b,::1,POST,http://localhost/curso-backfront/symfony/web/app_dev.php/task/list,1560367854,,200
 67cdbd,::1,POST,http://localhost/curso-backfront/symfony/web/app_dev.php/task/list?page=2,1560367965,,200
 42c4bc,::1,POST,http://localhost/curso-backfront/symfony/web/app_dev.php/task/list?page=1,1560367970,,200
+91a0d0,::1,GET,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/,1560839339,,200
+1fb601,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1560842923,,200
+fe5921,::1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1560843007,,200
+7c60ac,::1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1560843009,,200
+cdedf2,::1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1560843143,,200
+f6ee38,::1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1560843234,,200
