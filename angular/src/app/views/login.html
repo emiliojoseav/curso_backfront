@@ -1,6 +1,15 @@
 <div class="col-md-12"><!-- Esta clase hace que el ancho sea el 100% -->
 	<h3>{{title}}</h3>
 
+	<!-- Mensaje si el login es correcto -->
+	<div class="identity-alert alert alert-success" *ngIf="identity && identity.sub">
+		¡Te has logueado! Bienvenido {{identity.email}}
+	</div>
+	<!-- Mensaje si el login es incorrecto -->
+	<div class="identity-alert alert alert-danger" *ngIf="identity && identity.data">
+		¡Identificación incorrecta!
+	</div>
+
 	<form #logginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7 no-padding-left">
 		<p>
 			<label>Email:</label>

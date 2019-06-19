@@ -15,58 +15,57 @@ export class LoginComponent implements OnInit {
   public user;
   public identity;
   public token;
-  
-  constructor(private _route: ActivatedRoute, private _router: Router, private _userService: UserService){
-      // se pueden crear variable que en HTML pueden imprimirse por interpolación {{}}
-      this.title = 'Identificación';
-      this.user = {
-        "email" : "",
-        "password" : "",
-        "getHash" : "true"
-      };
+
+  constructor(private _route: ActivatedRoute, private _router: Router, private _userService: UserService) {
+    // se pueden crear variable que en HTML pueden imprimirse por interpolación {{}}
+    this.title = 'Identificación';
+    this.user = {
+      "email": "",
+      "password": "",
+      "getHash": "true"
+    };
   }
   ngOnInit() {
     console.log('Componente login.component cargado!!');
-    console.log(JSON.parse(localStorage.getItem('identity')));
-    console.log(JSON.parse(localStorage.getItem('token')));
   }
 
   onSubmit() {
     console.log(this.user);
-    this._userService.signup(this.user).subscribe( //con subscribe recojemos la respuesta
-      response => {
+    // realizamos la petición
+    this._userService.signup(this.user).
+      // tratamos la respuesta asíncrona
+      subscribe(response => {
         this.identity = response;
         if (this.identity.length <= 1) {
           console.log('Error en el servidor');
-          console.log(this.identity);
-        } else {
-          if (!this.identity.status) {
-            localStorage.setItem('identity', JSON.stringify(this.identity));
-            // GET TOKEN
-            this.user.getHash = "false";
-            this._userService.signup(this.user).subscribe(
-              response => {
-                this.token = response;
-                if (this.identity.length <= 1) {
-                  console.log('Error en el servidor');
-                  console.log(this.identity);
-                } else {
-                  if (!this.identity.status) {
-                    localStorage.setItem('token', JSON.stringify(this.token));
-                  }
-                }
-              },
+          return;
+        }
+        // si no hay status la identificación es correcta
+        if (!this.identity.status) {
+          localStorage.setItem('identity', JSON.stringify(this.identity));
+          // obtenemos el token
+          this.user.getHash = "false";
+          this._userService.signup(this.user).
+            subscribe(response => {
+              this.token = response;
+              if (!this.token) {
+                console.log('Error en el servidor');
+                return;
+              }
+              if (!this.token.status) {
+                localStorage.setItem('token', JSON.stringify(this.token));
+              }
+            },
               error => {
                 console.log(<any>error);
               }
             );
-          }
         }
       },
-      error => {
-        console.log(<any>error);
-      }
-    );
+        error => {
+          console.log(<any>error);
+        }
+      );
   }
 }
 

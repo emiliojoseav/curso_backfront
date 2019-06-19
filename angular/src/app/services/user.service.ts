@@ -21,12 +21,26 @@ export class UserService {
 	}
 
 	// peticion ajax al método login de la API REST
-	signup(user_to_login) {
+	signup (user_to_login) {
 		let json = JSON.stringify(user_to_login);
 		console.log(json);
 		let params = "json=" + json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'}); //la petición se envía como formulario
 
 		return this._http.post(this.url+'/login', params, {headers: headers}).map(res => res.json());
+	}
+
+	// recuperamos el identity del localStorage
+	getIdentity () {
+		let identity = JSON.parse(localStorage.getItem("identity"));
+		this.identity = (identity) ? identity : null;
+		return identity;
+	}
+
+	// recuperamos el token del localStorage
+	getToken () {
+		let token = JSON.parse(localStorage.getItem("token"));
+		this.token = (token) ? token : null;
+		return token;
 	}
 }
