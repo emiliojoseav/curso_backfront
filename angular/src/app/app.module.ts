@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 // cargar los componentes para poder usarlos
 import { LoginComponent } from './components/login.component';
 import { RegisterComponent } from './components/register.component';
+import { DefaultComponent } from './components/default.component';
 // cargar las rutas que hemos creado en app.routing.ts
 import { routing, appRoutingProviders } from './app.routing';
 
@@ -14,7 +15,8 @@ import { routing, appRoutingProviders } from './app.routing';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DefaultComponent
   ],
   imports: [
     BrowserModule,

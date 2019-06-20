@@ -11,21 +11,21 @@
 	</div>
 
 	<form #logginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7 no-padding-left">
-		<p>
-			<label>Email:</label>
-			<!-- 
-				#email="ngModel": indica que angular va a interactuar con datos que están en nuestro modelo(componente)
-				[(ngModel)]: two way data binding, si se cambia algo en la vista o en el modelo se cambia en los dos sitios
-			-->
-			<input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="user.email" required/> 
-			<!-- *ngIf: condición para que se muestre el span-->
-			<span *ngIf='!email.valid && email.touched'>El mail no es válido</span>
-		</p>
-		<p>
-			<label>Contraseña:</label>
-			<input type="password" class="form-control" name="password" #password="ngModel" [(ngModel)]="user.password" required>
-			<span *ngIf='!password.valid && password.touched'>El password no es válido</span>
-		</p>
-		<input type="submit" value="Entrar" class="btn btn-primary" [disabled]="!logginForm.valid"/>
+			<p>
+				<label>Email:</label>
+				<!-- 
+					#email="ngModel": indica que angular va a interactuar con datos que están en nuestro modelo(componente)
+					[(ngModel)]: two way data binding, si se cambia algo en la vista o en el modelo se cambia en los dos sitios
+				-->
+				<input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="user.email" required/> 
+				<!-- *ngIf: condición para que se muestre el span-->
+				<span *ngIf='!email.valid && email.touched'>El mail no es válido</span>
+			</p>
+			<p>
+				<label>Contraseña:</label>
+				<input type="password" class="form-control" name="password" #password="ngModel" [(ngModel)]="user.password" required>
+				<span *ngIf='!password.valid && password.touched'>El password no es válido</span>
+			</p>
+			<input type="submit" value="Entrar" class="btn btn-primary" [disabled]="!logginForm.valid"/>
 	</form>
 </div>

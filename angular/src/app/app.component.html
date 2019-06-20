@@ -4,16 +4,18 @@
     <div class="navbar-header">
       <!-- botón desplegar menú -->
       <!-- con "data-target se indica a qué elemento apunta el botón para hacer toggle"  -->
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-extended="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
+        aria-extended="false">
         <span class="sr-only">Toggle</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      
+
       <!-- Icono del site -->
-      <a clas="navbar-brand" [routerLink]="['/']"><!-- Routerlink indica hacia donde apunta el enlace -->
-        <img src="./assets/img/logo.png" id="logo"/>
+      <a clas="navbar-brand" [routerLink]="['/']">
+        <!-- Routerlink indica hacia donde apunta el enlace -->
+        <img src="./assets/img/logo.png" id="logo" />
       </a>
     </div>
 
@@ -27,29 +29,34 @@
           </a>
         </li>
         <li>
-          <a [routerLink]="['/']">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><!-- Se asigna icono de bootstrap -->
+          <!-- "crear tarea" solo se muestra si existe identity -->
+          <a [routerLink]="['/']" *ngIf="identity && identity.sub">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             Crear Tarea
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="['/']">
-            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span><!-- Se asigna icono de bootstrap -->
-            Ajustes
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="['/']">
-            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><!-- Se asigna icono de bootstrap -->
-            Salir
           </a>
         </li>
       </ul>
 
-      <!-- Login y registro -->
-      <ul class="nav navbar-nav navbar-right">
+      <!-- "Login y registro" solo se muestran si NO existe identity-->
+      <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
         <li><a [routerLink]="['/login']">Acceder</a></li>
         <li><a [routerLink]="['/register']">Registro</a></li>
+      </ul>
+
+      <!-- "ajustes y salir" solo se muestran si existe identity -->
+      <ul class="nav navbar-nav navbar-right" *ngIf="identity && identity.sub">
+        <li>
+          <a [routerLink]="['/']">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            Ajustes
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/login', 1]"> <!--redirigimos hacia el logout ubicado en login.component, la redirección se define en app.routing.ts-->
+            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+            Salir
+          </a>
+        </li>
       </ul>
     </div>
   </div>

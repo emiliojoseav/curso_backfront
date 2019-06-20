@@ -9,11 +9,15 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent {
   title = 'app works!';
+  public identity;
+  public token;
 
-  constructor(private _userService: UserService) {}
+  constructor(private _userService: UserService) {
+    this.identity = this._userService.getIdentity();
+    this.token = this._userService.getToken();
+  }
 
   ngOnInit() {
-    console.log(this._userService.getIdentity());
-    console.log(this._userService.getToken());
+    console.log("app.component cargado");
   }
 }

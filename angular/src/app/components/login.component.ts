@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 // importamos el servicio que hemos creado
 import { UserService } from '../services/user.service';
+import { routing } from 'app/app.routing';
 
 @Component({
   selector: 'login', // etiqueta html para el componente
   templateUrl: '../views/login.html',
-  providers: [UserService]
+  providers: [UserService, ]
 })
 // se exporta para permitir usar el componente en otros ficheros
 export class LoginComponent implements OnInit {
@@ -27,6 +28,21 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
     console.log('Componente login.component cargado!!');
+    this.logout();
+  }
+
+  logout () {
+    this._route.params.forEach((params: Params) => {
+      let logout = +params['id'];// con "+" convertimos a número
+      // eliminamos variables y redirigimos a login
+      if (logout == 1) {
+        localStorage.removeItem("identity");
+        localStorage.removeItem("token");
+        this.identity = null;
+        this.token = null;
+        window.location.href = "/login";
+      }
+    });
   }
 
   onSubmit() {
@@ -54,6 +70,8 @@ export class LoginComponent implements OnInit {
               }
               if (!this.token.status) {
                 localStorage.setItem('token', JSON.stringify(this.token));
+                // redirigimos a la ruta por defecto que apunta a RegisterComponent, ver rutas en app.routing.ts
+                window.location.href = "/";
               }
             },
               error => {
