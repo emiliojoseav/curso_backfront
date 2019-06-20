@@ -13,6 +13,7 @@ export class DefaultComponent implements OnInit{
       // se pueden crear variable que en HTML pueden imprimirse por interpolación {{}}
       this.title = 'Home page';
   }
+  
   ngOnInit() {
     console.log('Componente default.component cargado');
   }

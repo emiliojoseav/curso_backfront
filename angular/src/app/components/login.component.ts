@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   public token;
 
   constructor(private _route: ActivatedRoute, private _router: Router, private _userService: UserService) {
-    // se pueden crear variable que en HTML pueden imprimirse por interpolación {{}}
+    // se pueden crear variable que en HTML pueden imprimirse por interpolación {{nombreVariable}}
     this.title = 'Identificación';
     this.user = {
       "email": "",
@@ -29,6 +29,18 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     console.log('Componente login.component cargado!!');
     this.logout();
+    // Redirige si se accede a la ruta de loguin estando ya identificado
+    this.redirectIfIdentified();
+  }
+
+  /** 
+   * Redirige si se accede a la ruta de loguin estando ya identificado
+   */
+  redirectIfIdentified() {
+    let identity = this._userService.getIdentity();
+    if (identity && identity.sub) {
+      this._router.navigate(["/"]);
+    }
   }
 
   logout () {
@@ -40,7 +52,8 @@ export class LoginComponent implements OnInit {
         localStorage.removeItem("token");
         this.identity = null;
         this.token = null;
-        window.location.href = "/login";
+        //window.location.href = "/login";
+        this._router.navigate(["/login"]);
       }
     });
   }
