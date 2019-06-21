@@ -6,7 +6,7 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'register', // etiqueta html para el componente
   templateUrl: '../views/register.html',
-  providers: [UserService, ]
+  providers: [UserService]
 })
 // permitir usar el componente en otros ficheros
 export class RegisterComponent implements OnInit{
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit{
   constructor(private _route: ActivatedRoute, private _router: Router, private _userService: UserService){
       // se pueden crear variable que en HTML pueden imprimirse por interpolación {{}}
       this.title = 'Registro';
-      this.user = new User(1, "user", "", "", "", "");
+      this.user = new User("", "", "user", "", "");
   }
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit{
   onSubmit() {
     console.log(this.user);
     // realizamos la petición
-    this._userService.signup(this.user).
+    this._userService.register(this.user).
       // tratamos la respuesta asíncrona
       subscribe(response => {
         this.status = response.status;
@@ -37,7 +37,11 @@ export class RegisterComponent implements OnInit{
           this.status = 'error';
         // se vacía el formulario
         } else {
-          this.user = new User(1, "user", "", "", "", "");
+          this.user.name = "";
+          this.user.surname = "";
+          this.user.role = "user";
+          this.user.email = "";
+          this.user.password = "";
         }
       },
       error => {

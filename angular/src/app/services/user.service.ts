@@ -47,6 +47,7 @@ export class UserService {
 	// registra un usuario
 	register (user_to_register) {
 		let json = JSON.stringify(user_to_register);
+		console.log(json);
 		let params = "json=" + json; 
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		       //petición a la url de registro del server(symfony)               // respuesta
