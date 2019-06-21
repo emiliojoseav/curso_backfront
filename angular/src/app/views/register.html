@@ -2,15 +2,15 @@
 	<h3>{{title}}</h3>
 
 	<!-- Mensaje si el registro es correcto -->
-	<!--<div class="identity-alert alert alert-success" *ngIf="identity && identity.sub">
-		¡usuario Registrado! {{identity.email}}
-	</div>-->
+	<div class="alert alert-success" *ngIf="status == 'success'">
+		¡Usuario Registrado!, ya puedes <a [routerLink]="['/login']">loguearte</a> 
+	</div>
 	<!-- Mensaje si el registro es incorrecto -->
-	<!--<div class="identity-alert alert alert-danger" *ngIf="identity && identity.data">
+	<div class="alert alert-danger" *ngIf="status == 'error'">
 		Registro incorrecto!
-	</div>-->
+	</div>
 
-	<form #registerForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7 no-padding-left">
+	<form #registerForm="ngForm" (ngSubmit)="onSubmit(); registerForm.reset();" class="col-md-7 no-padding-left">
 			<p>
                 <label>Nombre:</label>
                 <!--Se usa el patrón twoWayDataBinding los parámetros de componente y vista se modifican mutuamente -->

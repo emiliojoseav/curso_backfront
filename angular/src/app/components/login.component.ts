@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // se hace la llamada al servido de login
   onSubmit() {
     console.log(this.user);
     // realizamos la petición

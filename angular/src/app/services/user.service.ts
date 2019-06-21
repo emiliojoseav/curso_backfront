@@ -26,7 +26,7 @@ export class UserService {
 		console.log(json);
 		let params = "json=" + json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'}); //la petición se envía como formulario
-
+               //petición a la url de login del server(symfony)               // respuesta
 		return this._http.post(this.url+'/login', params, {headers: headers}).map(res => res.json());
 	}
 
@@ -42,5 +42,14 @@ export class UserService {
 		let token = JSON.parse(localStorage.getItem("token"));
 		this.token = (token) ? token : null;
 		return token;
+	}
+
+	// registra un usuario
+	register (user_to_register) {
+		let json = JSON.stringify(user_to_register);
+		let params = "json=" + json; 
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		       //petición a la url de registro del server(symfony)               // respuesta
+		return this._http.post(this.url+'/user/new', params, {headers: headers}).map(res => res.json());
 	}
 }
