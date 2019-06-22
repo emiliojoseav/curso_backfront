@@ -53,4 +53,14 @@ export class UserService {
 		       //petición a la url de registro del server(symfony)               // respuesta
 		return this._http.post(this.url+'/user/new', params, {headers: headers}).map(res => res.json());
 	}
+
+	// edita un usuario
+	edit (user_to_edit) {
+		let json = JSON.stringify(user_to_edit);
+		console.log(json);
+		let params = "json=" + json + "&authorization=" + this.getToken();
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		       //petición a la url de registro del server(symfony)               // respuesta
+		return this._http.post(this.url+'/user/edit', params, {headers: headers}).map(res => res.json());
+	}
 }

@@ -306,3 +306,14 @@ c33cf0,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.
 8992e3,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/user/new,1561138396,,200
 0adae3,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1561138411,,200
 546be9,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1561138412,,200
+ec7aff,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1561215783,,200
+dba4e2,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1561215784,,200
+d54453,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/user/new,1561215857,,200
+d40d6e,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1561215873,,200
+30ccde,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1561215874,,200
+733af7,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/user/edit,1561217997,,200
+212ed8,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/user/edit,1561218505,,200
+69ceeb,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/user/edit,1561218767,,200
+c87554,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1561218989,,200
+76eb48,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/login,1561218990,,200
+8b567a,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/user/edit,1561219007,,200

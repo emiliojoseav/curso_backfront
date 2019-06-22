@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit{
   constructor(private _route: ActivatedRoute, private _router: Router, private _userService: UserService){
       // se pueden crear variable que en HTML pueden imprimirse por interpolación {{}}
       this.title = 'Registro';
-      this.user = new User("", "", "user", "", "");
+      this.user = new User("", "", "", "user", "", "");
   }
 
   ngOnInit() {

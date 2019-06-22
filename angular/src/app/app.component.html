@@ -46,7 +46,7 @@
       <!-- "ajustes y salir" solo se muestran si existe identity -->
       <ul class="nav navbar-nav navbar-right" *ngIf="identity && identity.sub">
         <li>
-          <a [routerLink]="['/']">
+          <a [routerLink]="['/user-edit']">
             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             Ajustes
           </a>
