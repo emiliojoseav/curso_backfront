@@ -27,7 +27,7 @@ export class UserEditComponent implements OnInit{
 
   ngOnInit() {
     console.log('Componente user.edit.component cargado');
-    // regirigimos a la evntana de login si no tenemos datos del usuario logueado
+    // regirigimos a la ventana de login si no tenemos datos del usuario logueado
     if (!this.identity) {
         this._router.navigate(['/login']);
     // de otra forma rellenamos el objeto user con los datos del identity

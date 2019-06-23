@@ -30,7 +30,7 @@
         </li>
         <li>
           <!-- "crear tarea" solo se muestra si existe identity -->
-          <a [routerLink]="['/']" *ngIf="identity && identity.sub">
+          <a [routerLink]="['/task-new']" *ngIf="identity && identity.sub">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             Crear Tarea
           </a>
