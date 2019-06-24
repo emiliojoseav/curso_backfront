@@ -1,5 +1,5 @@
 <div class="col-md-12"><!-- Esta clase hace que el ancho sea el 100% -->
-	<h3>{{title}}</h3>
+	<h3>{{page_title}}</h3>
 
 	<!-- Mensaje si el registro es correcto -->
 	<div class="alert alert-success" *ngIf="status == 'success'">
@@ -14,21 +14,21 @@
 			<p>
                 <label>Título:</label>
                 <!--Se usa el patrón twoWayDataBinding los parámetros de componente y vista se modifican mutuamente -->
-				<input type="text" class="form-control" name="title" required/> 
+				<input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="task.title" required/> 
                 <span *ngIf='!title.valid && title.touched'>El título es obligatorio</span>
             </p>
             <p>
 				<label>Descripción:</label>
-				<textarea class="form-control" name="description" required></textarea>
+				<textarea class="form-control" name="description" #description="ngModel" [(ngModel)]="task.description"></textarea>
             </p>
             <p>
                 <label>Estado:</label>
-                <select class="form-control" name="status">
+                <select class="form-control" name="status" #status="ngModel" [(ngModel)]="task.status">
                     <option value="new">Nueva</option>
                     <option value="todo">Para hacer</option>
                     <option value="finished">Acabada</option>
                 </select>
             </p>
-			<input type="submit" value="Crear nueva tarea" class="btn btn-success" [disabled]="!taskNewForm.valid"/>
+			<input type="submit" value="{{page_title}}" class="btn btn-success" [disabled]="!taskNewForm.valid"/>
 	</form>
 </div>

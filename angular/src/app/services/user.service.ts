@@ -1,7 +1,7 @@
 // Crear un servicio
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers} from '@angular/http';
-import "rxjs/add/operator/map";
+import "rxjs/add/operator/map"; // captura la respuesta del servicio REST
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs/Observable';
 import {GLOBAL} from './global';
@@ -20,7 +20,7 @@ export class UserService {
 		this.url = GLOBAL.url;
 	}
 
-	// peticion ajax al método login de la API REST
+	// peticion ajax a la ruta "login" de la API REST
 	signup (user_to_login) {
 		let json = JSON.stringify(user_to_login);
 		console.log(json);

@@ -32,7 +32,7 @@ export class UserEditComponent implements OnInit{
         this._router.navigate(['/login']);
     // de otra forma rellenamos el objeto user con los datos del identity
     } else {
-        this.user.id = this.identity.dub;
+        this.user.id = this.identity.sub;
         this.user.name = this.identity.name;
         this.user.surname = this.identity.surname;
         this.user.role = this.identity.role;
