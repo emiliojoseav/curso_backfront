@@ -16,6 +16,7 @@ export class TaskNewComponent implements OnInit{
   public identity;
   public token;
   public task: Task;
+  public status_task;
   
   constructor(
     private _route: ActivatedRoute, 
@@ -37,12 +38,29 @@ export class TaskNewComponent implements OnInit{
     } else {
       this.task = new Task(null,'','','new',null,null);
     }
-    console.log(this._taskService.create(this.task));
   }
 
   // se hace la llamada al servido de cración de tarea
   onSubmit() {
     console.log(this.task);
+    // realizamos la petición
+    this._taskService.create(this.token, this.task).
+      // tratamos la respuesta asíncrona
+      subscribe(response => {
+        this.status_task = response.status;
+        if (this.status_task != 'success') {
+          this.status_task = 'error';
+        // se actualiza el el identity guardado en loclaSotrage
+        } else {
+          this.task = response.data;
+          // redirigimos al home
+          this._router.navigate(['/']);
+        }
+      },
+      error => {
+        console.log(<any>error);
+      }
+    );
   }
 }
 

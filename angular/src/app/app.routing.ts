@@ -11,6 +11,8 @@ import { TaskNewComponent } from './components/task.new.component';
 // creamos rutas
 const appRoutes: Routes= [
 	{path:'',component: DefaultComponent}, // con path vacío carga por defecto el DefaultComponent
+	{path:'index',component: DefaultComponent},
+	{path:'index/:page',component: DefaultComponent}, // se indica la página de tareas
 	{path:'login',component: LoginComponent},
 	{path:'login/:id',component: LoginComponent}, // se indica que la ruta puede recibir un parámetro
 	{path:'register',component: RegisterComponent},

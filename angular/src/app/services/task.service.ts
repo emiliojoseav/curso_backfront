@@ -19,13 +19,23 @@ export class TaskService {
 	}
 
 	// peticion ajax a la ruta "/task/new" de la API REST
-	create (task_to_create) {
-		return "servicio de creación de tarea";
-		// let json = JSON.stringify(user_to_login);
-		// console.log(json);
-		// let params = "json=" + json;
-		// let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'}); //la petición se envía como formulario
-        //        //petición a la url de login del server(symfony)               // respuesta
-		// return this._http.post(this.url+'/login', params, {headers: headers}).map(res => res.json());
+	create (token, task) {
+		let json = JSON.stringify(task);
+		console.log(json);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'}); //la petición se envía como formulario
+               //petición a la url de login del server(symfony)                  // respuesta
+		return this._http.post(this.url+'/task/new', params, {headers: headers}).map(res => res.json());
+	}
+
+	// listado de tareas
+	getTasks(token, page = null) {
+		let params = "authorization=" + token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'}); //la petición se envía como formulario
+		if (!page) {
+			page = 1;
+		}
+               //petición a la url de login del server(symfony)                                // respuesta
+		return this._http.post(this.url+'/task/list?page=' + page, params, {headers: headers}).map(res => res.json());
 	}
 }
