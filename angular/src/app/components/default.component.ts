@@ -15,6 +15,11 @@ export class DefaultComponent implements OnInit{
   public identity;
   public token;
   public tasks:Array<Task>;
+  public loading;
+  // variables de paginación
+  public pages;
+  public pagePrev;
+  public pageNext;
   
   constructor(private _route: ActivatedRoute, 
     private _router: Router, 
@@ -39,13 +44,32 @@ export class DefaultComponent implements OnInit{
       if (!page) {
         page = 1;
       }
+      this.loading = 'show';
       this._taskService.getTasks(this.token, page).
         // tratamos la respuesta asíncrona
         subscribe(response => {
           if (response.status == 'success') {
             this.tasks = response.data;
-            console.log(this.tasks);
-          // se actualiza el el identity guardado en loclaSotrage
+            this.loading = 'hide';
+            // console.log(this.tasks);
+            
+            // total de páginas recibidas
+            this.pages = [];
+            for (let i = 0; i < response.total_pages; i++) {
+              this.pages.push(i);
+            }
+            // página anterior
+            if(page >= 2) {
+              this.pagePrev = (page - 1);
+            } else {
+              this.pagePrev = page;
+            }
+            // página siguiente
+            if(page < response.total_pages) {
+              this.pageNext = (page + 1);
+            } else {
+              this.pageNext = page;
+            }
           }
         },
         error => {
