@@ -8,6 +8,7 @@ import { DefaultComponent } from './components/default.component';
 import { UserEditComponent } from './components/user.edit.component';
 import { TaskNewComponent } from './components/task.new.component';
 import { TaskDetailComponent } from './components/task.detail.component';
+import { TaskEditComponent } from './components/task.edit.component';
 
 // creamos rutas
 const appRoutes: Routes= [
@@ -20,6 +21,7 @@ const appRoutes: Routes= [
 	{path:'user-edit',component: UserEditComponent},
 	{path:'task-new',component: TaskNewComponent},
 	{path:'task/:id',component: TaskDetailComponent}, // ruta con el id de la tarea a mostrar
+	{path:'task-edit/:id',component: TaskEditComponent}, // ruta con el id de la tarea a editar
 	{path:'**',component: LoginComponent} // cualquier otra ruta carga LoginComponent
 ];
 

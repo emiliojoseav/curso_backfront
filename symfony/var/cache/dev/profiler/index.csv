@@ -502,3 +502,13 @@ f294a4,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.
 d7d6bb,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/detail/3,1562224434,,200
 a304a3,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/list?page=1,1562224436,,200
 1abf89,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/detail/1,1562224437,,200
+15481a,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/list?page=1,1562242820,,200
+ab89d2,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/list?page=1,1562242826,,200
+e3d046,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/list?page=1,1562243033,,200
+c7cf21,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/list?page=1,1562243048,,200
+9098a0,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/detail/3,1562243059,,200
+9b9514,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/list?page=1,1562243081,,200
+e291db,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/detail/1,1562243082,,200
+59d4cb,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/list?page=1,1562243086,,200
+277626,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/detail/1,1562243089,,200
+543e9d,127.0.0.1,POST,http://localhost:8080/curso_backfront/symfony/web/app_dev.php/task/edit/1,1562243138,,200

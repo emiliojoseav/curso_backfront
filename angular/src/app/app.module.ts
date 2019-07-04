@@ -11,6 +11,7 @@ import { DefaultComponent } from './components/default.component';
 import { UserEditComponent } from './components/user.edit.component';
 import { TaskNewComponent } from './components/task.new.component';
 import { TaskDetailComponent } from './components/task.detail.component';
+import { TaskEditComponent } from './components/task.edit.component';
 // cargar las rutas que hemos creado en app.routing.ts
 import { routing, appRoutingProviders } from './app.routing';
 
@@ -22,7 +23,8 @@ import { routing, appRoutingProviders } from './app.routing';
     DefaultComponent,
     UserEditComponent,
     TaskNewComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    TaskEditComponent
   ],
   imports: [
     BrowserModule,
