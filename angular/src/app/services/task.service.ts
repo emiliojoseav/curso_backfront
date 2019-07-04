@@ -38,4 +38,14 @@ export class TaskService {
                //petición a la url de login del server(symfony)                                // respuesta
 		return this._http.post(this.url+'/task/list?page=' + page, params, {headers: headers}).map(res => res.json());
 	}
+
+	// detalle de tarea
+	getTask(token, id) {
+		let params = "authorization=" + token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'}); //la petición se envía como formulario
+                          //petición a la url de login del server(symfony)
+		return this._http.post(this.url+'/task/detail/' + id, params, {headers: headers})
+						  // respuesta
+						 .map(res => res.json());
+	}
 }
