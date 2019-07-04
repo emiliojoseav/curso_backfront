@@ -17,6 +17,8 @@ export class TaskNewComponent implements OnInit{
   public token;
   public task: Task;
   public status_task;
+  public successMsg = '¡Tarea creada correctamente!';
+  public failMsg = '¡Error en la creación de la tarea!';
   
   constructor(
     private _route: ActivatedRoute, 

@@ -18,6 +18,8 @@ export class TaskEditComponent implements OnInit{
   public task: Task;
   public status_task;
   public loading;
+  public successMsg = '¡Tarea editada correctamente!';
+  public failMsg = '¡Error en la edición de la tarea!';
   
   constructor(
     private _route: ActivatedRoute, 
@@ -37,6 +39,9 @@ export class TaskEditComponent implements OnInit{
         this._router.navigate(['/login']);
     // de otra forma rellenamos el objeto task con la peticion ajax
     } else {
+      // inicializamos la tarea para evitar errores con el html y el twoWayDataBinding
+      this.task = new Task(null,null,null,null,null,null);
+      // se obtienen los datos de la tarea
       this.getTask();
     }
   }
@@ -50,10 +55,10 @@ export class TaskEditComponent implements OnInit{
         this._taskService.update(this.token, this.task, id).
         // tratamos la respuesta asíncrona
         subscribe(response => {
+          console.log(response);
             this.status_task = response.status;
             if (this.status_task != 'success') {
             this.status_task = 'error';
-            // se actualiza el el identity guardado en loclaSotrage
             } else {
             this.task = response.data;
             // redirigimos al home

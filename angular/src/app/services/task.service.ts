@@ -52,7 +52,7 @@ export class TaskService {
 	// actualizar tarea
 	update(token, task, id) {
 		let json = JSON.stringify(task);
-		let params = "json=" + json + "authorization=" + token;
+		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'}); //la petición se envía como formulario
                           //petición a la url de login del server(symfony)
 		return this._http.post(this.url+'/task/edit/' + id, params, {headers: headers})

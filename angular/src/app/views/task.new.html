@@ -3,11 +3,12 @@
 
 	<!-- Mensaje si el registro es correcto -->
 	<div class="alert alert-success" *ngIf="status_task == 'success'">
-		¡Tarea creada correctamente!
+		{{successMsg}}
 	</div>
+	
 	<!-- Mensaje si el registro es incorrecto -->
 	<div class="alert alert-danger" *ngIf="status_task == 'error'">
-		¡Error en la cración de la tarea!
+		{{failMsg}}
 	</div>
 
 	<form #taskNewForm="ngForm" (ngSubmit)="onSubmit(); taskNewForm.reset();" class="col-md-7 no-padding-left">
