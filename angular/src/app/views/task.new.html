@@ -1,35 +1,44 @@
 <div class="col-md-12"><!-- Esta clase hace que el ancho sea el 100% -->
-	<h3>{{page_title}}</h3>
 
-	<!-- Mensaje si el registro es correcto -->
-	<div class="alert alert-success" *ngIf="status_task == 'success'">
-		{{successMsg}}
-	</div>
-	
-	<!-- Mensaje si el registro es incorrecto -->
-	<div class="alert alert-danger" *ngIf="status_task == 'error'">
-		{{failMsg}}
+	<div class="loader" *ngIf="loading == 'show'">
+		<img src="../../assets/img/loader.gif">
 	</div>
 
-	<form #taskNewForm="ngForm" (ngSubmit)="onSubmit(); taskNewForm.reset();" class="col-md-7 no-padding-left">
+	<div class="col-md-12" *ngIf="!loading || task">
+		<h3>{{page_title}}</h3>
+
+		<!-- Mensaje si el registro es correcto -->
+		<div class="alert alert-success" *ngIf="status_task == 'success'">
+			{{successMsg}}
+		</div>
+
+		<!-- Mensaje si el registro es incorrecto -->
+		<div class="alert alert-danger" *ngIf="status_task == 'error'">
+			{{failMsg}}
+		</div>
+
+		<form #taskNewForm="ngForm" (ngSubmit)="onSubmit(); taskNewForm.reset();" class="col-md-7 no-padding-left">
 			<p>
-                <label>Título:</label>
-                <!--Se usa el patrón twoWayDataBinding los parámetros de componente y vista se modifican mutuamente -->
-				<input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="task.title" required/> 
-                <span *ngIf='!title.valid && title.touched'>El título es obligatorio</span>
-            </p>
-            <p>
+				<label>Título:</label>
+				<!--Se usa el patrón twoWayDataBinding los parámetros de componente y vista se modifican mutuamente -->
+				<input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="task.title"
+					required />
+				<span *ngIf='!title.valid && title.touched'>El título es obligatorio</span>
+			</p>
+			<p>
 				<label>Descripción:</label>
-				<textarea class="form-control" name="description" #description="ngModel" [(ngModel)]="task.description"></textarea>
-            </p>
-            <p>
-                <label>Estado:</label>
-                <select class="form-control" name="status" #status="ngModel" [(ngModel)]="task.status">
-                    <option value="new">Nueva</option>
-                    <option value="todo">Para hacer</option>
-                    <option value="finished">Acabada</option>
-                </select>
-            </p>
-			<input type="submit" value="{{page_title}}" class="btn btn-success" [disabled]="!taskNewForm.valid"/>
-	</form>
+				<textarea class="form-control" name="description" #description="ngModel"
+					[(ngModel)]="task.description"></textarea>
+			</p>
+			<p>
+				<label>Estado:</label>
+				<select class="form-control" name="status" #status="ngModel" [(ngModel)]="task.status">
+					<option value="new">Nueva</option>
+					<option value="todo">Para hacer</option>
+					<option value="finished">Acabada</option>
+				</select>
+			</p>
+			<input type="submit" value="{{page_title}}" class="btn btn-success" [disabled]="!taskNewForm.valid" />
+		</form>
+	</div>
 </div>

@@ -20,6 +20,10 @@ export class DefaultComponent implements OnInit{
   public pages;
   public pagePrev;
   public pageNext;
+  // variables para la búsqueda
+  public filter = 0;
+  public order = 0;
+  public searchString;
   
   constructor(private _route: ActivatedRoute, 
     private _router: Router, 
@@ -77,5 +81,11 @@ export class DefaultComponent implements OnInit{
         }
       );
     });
+  }
+
+  search () {
+    console.log(this.filter);
+    console.log(this.order);
+    console.log(this.searchString);
   }
 }
