@@ -69,8 +69,15 @@
                 </tr>
             </table>
 
+            <div class="col-md-12" *ngIf="loading == 'hide' && (!tasks || tasks.length == 0)">
+                <div class="clearfix"></div>
+                <div clas="alert alert-warning">
+                    No se han encontrado tareas, crealas <a [routerLink]="['/task-new']">pinchando aquí</a>
+                </div>
+            </div>
+
             <!--PAGINACIÓN-->
-            <ul class="pagination" *ngIf="tasks && tasks.length >= 1">
+            <ul class="pagination" *ngIf="tasks && tasks.length >= 1 && !searchString && !filter && !order">
                 <li>
                     <a [routerLink]="['/index', pagePrev]" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>

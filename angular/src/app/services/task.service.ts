@@ -59,4 +59,21 @@ export class TaskService {
 						  // respuesta
 						 .map(res => res.json());
 	}
+
+	// buscar una tarea
+	search(token, search = null, filter = null, order = null) {
+		let params = "authorization=" + token + "&filter=" + filter + "&order=" + order;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'}); //la petición se envía como formulario
+		let url: string;
+		// tratamiento de la cadena de búsqueda
+		if (search == null) {
+			url = this.url+'/task/search';
+		} else {
+			url = this.url+'/task/search/' + search;
+		}
+						  //petición a la url de login del server(symfony)
+		return this._http.post(url, params, {headers: headers})
+						  // respuesta
+						 .map(res => res.json());
+	}
 }

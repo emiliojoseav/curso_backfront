@@ -424,6 +424,6 @@ class __TwigTemplate_ce48ce92d0cc8751be3c93a6ea5242bba4686a994984e09166c36d7ff6b
     });
 
 /*]]>*/</script>
-", "@Twig/base_js.html.twig", "C:\\wamp\\www\\curso-backfront\\symfony\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle\\Resources\\views\\base_js.html.twig");
+", "@Twig/base_js.html.twig", "C:\\wamp\\www\\curso_backfront\\symfony\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle\\Resources\\views\\base_js.html.twig");
     }
 }
