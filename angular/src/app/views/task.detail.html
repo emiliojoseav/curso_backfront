@@ -11,11 +11,31 @@
             <div class="panel-heading">
                 <h3 class="panel-title">
                     Tarea creada por <strong>{{task.user.name + ' ' + task.user.surname}}</strong> el
-                    {{task.createdAt.timestamp}}
+                    {{task.createdAt.timestamp | generateDate}}
                 </h3>
             </div>
             <div class="panel-body">
                 {{task.description}}
+            </div>
+        </div>
+        <!--BOTÓN PARA LANZAR EL MODAL DE ELIMINACIÓN-->
+        <a href="#myModal" role="button" class="btn btn-large btn-danger" data-toggle="modal">Borrar</a>
+        <!--MODAL PARA ELIMINAR TAREA-->
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">¿Estás eguro?</h4>               
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-warning">Vas a eliminar permanentemente la tarea, ¿Estás eguro?.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary" (click)="deleteTask(task.id)" data-dismiss="modal">Si</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

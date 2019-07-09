@@ -76,4 +76,14 @@ export class TaskService {
 						  // respuesta
 						 .map(res => res.json());
 	}
+
+	// elimina la tarea
+	deleteTask(token, id) {
+		let params = "authorization=" + token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'}); //la petición se envía como formulario
+                          //petición a la url de login del server(symfony)
+		return this._http.post(this.url+'/task/remove/' + id, params, {headers: headers})
+						  // respuesta
+						 .map(res => res.json());
+	}
 }

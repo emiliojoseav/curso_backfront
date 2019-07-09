@@ -62,6 +62,22 @@ export class TaskDetailComponent implements OnInit {
             );
         });
     }
+
+    deleteTask(id) {
+        this._taskService.deleteTask(this.token, id).subscribe(
+            response => {
+                // verificar que la tarea es nuestra para poder verla
+                if (response.status == 'success') {
+                    this._router.navigate(['/']);
+                } else {
+                    alert('No se ha borrado la tarea');
+                }
+            },
+            error => {
+                console.log(<any>error);
+            }
+        );
+    }
 }
 
 

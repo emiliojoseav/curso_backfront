@@ -14,6 +14,8 @@ import { TaskDetailComponent } from './components/task.detail.component';
 import { TaskEditComponent } from './components/task.edit.component';
 // cargar las rutas que hemos creado en app.routing.ts
 import { routing, appRoutingProviders } from './app.routing';
+// cargar pipes
+import { GenerateDatePipe } from './pipes/generate.date.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { routing, appRoutingProviders } from './app.routing';
     UserEditComponent,
     TaskNewComponent,
     TaskDetailComponent,
-    TaskEditComponent
+    TaskEditComponent,
+    GenerateDatePipe
   ],
   imports: [
     BrowserModule,
